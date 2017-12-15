@@ -5,10 +5,10 @@
   "scripts": {
     "clean": "rm -rf ./node_modules/",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "eslint": "eslint .",
     "puglint": "pug-lint views/",
     "pug-lint": "npm run puglint",
-    "lint": "npm run eslint && npm run puglint",
+    "xo": "xo --quiet",
+    "lint": "npm run xo && npm run puglint",
     "mocha": "mocha --invert --grep \"functional\"",
     "mocha:suite": "mocha",
     "mocha:functional": "mocha ./test/functional_test.js",
@@ -27,6 +27,9 @@
     "integrity": "node ./scripts/integrity.js",
     "sri": "node ./scripts/sri.js",
     "wp-plugin": "node ./scripts/wp-plugin.js"
+  },
+  "engines": {
+    "node": "10.x"
   },
   "dependencies": {
     "compression": "^1.7.2",
@@ -51,7 +54,7 @@
     "bootlint": "0.14.2",
     "bootstrap": "4.1.1",
     "coveralls": "^3.0.1",
-    "eslint": "^4.19.1",
+    "eslint-config-xo": "^0.22.2",
     "fs-extra": "^6.0.1",
     "fs-walk": "^0.0.2",
     "html-validator": "^3.0.3",
@@ -63,10 +66,82 @@
     "pug-lint": "^2.5.0",
     "pug-lint-config-clock": "^2.0.0",
     "request": "^2.87.0",
-    "uglify-js": "^3.3.27"
+    "uglify-js": "^3.3.27",
+    "xo": "^0.21.1"
   },
-  "engines": {
-    "node": "10.x"
+  "xo": {
+    "esnext": true,
+    "rules": {
+      "arrow-parens": [
+        "error",
+        "always"
+      ],
+      "capitalized-comments": "off",
+      "global-require": "error",
+      "import/no-unassigned-import": [
+        "error",
+        {
+          "allow": [
+            "app.js"
+          ]
+        }
+      ],
+      "indent": [
+        "error",
+        4,
+        {
+          "MemberExpression": "off",
+          "SwitchCase": 1
+        }
+      ],
+      "init-declarations": [
+        "error",
+        "always"
+      ],
+      "new-cap": "off",
+      "no-multi-spaces": [
+        "error",
+        {
+          "ignoreEOLComments": true,
+          "exceptions": {
+            "Property": true,
+            "VariableDeclarator": true
+          }
+        }
+      ],
+      "no-undefined": "error",
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "prefer-reflect": "off",
+      "prefer-destructuring": "off",
+      "quote-props": [
+        "error",
+        "consistent"
+      ],
+      "unicorn/filename-case": "off",
+      "unicorn/no-process-exit": "off"
+    },
+    "overrides": [
+      {
+        "files": "public/assets/js/*.js",
+        "esnext": false,
+        "strict": true,
+        "envs": [
+          "browser"
+        ],
+        "rules": {
+          "unicorn/no-abusive-eslint-disable": "off"
+        }
+      },
+      {
+        "files": "test/*.js",
+        "envs": [
+          "mocha"
+        ]
+      }
+    ]
   },
   "nyc": {
     "include": [
