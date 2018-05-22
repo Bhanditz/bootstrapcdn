@@ -39,6 +39,16 @@ describe('bootswatch4', () => {
         helpers.assert.bodyClass('page-bootswatch', response, done);
     });
 
+    it('handles invalid theme query parameter', (done) => {
+        const invalidUri = helpers.getURI('bootswatch/?theme=555');
+        let invalidResponse = {};
+
+        helpers.prefetch(invalidUri, (res) => {
+            invalidResponse = res;
+            helpers.assert.itWorks(invalidResponse.statusCode, done);
+        });
+    });
+
     config.bootswatch4.themes.forEach((theme) => {
         describe(theme.name, () => {
             const themeImage = format(config.bootswatch4.image, theme.name);
