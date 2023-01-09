@@ -42,7 +42,7 @@
     "jstransformer-clean-css": "^2.1.0",
     "morgan": "^1.9.0",
     "pug": "^2.0.3",
-    "rollbar": "^2.4.1",
+    "rollbar": "^2.19.0",
     "semver": "^5.5.0",
     "serve-favicon": "^2.5.0",
     "sri-toolbox": "^0.2.0",
